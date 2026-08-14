@@ -66,11 +66,18 @@ int main(void)
 		USART6_write(start_string, 15);
 		if (BT_Flag == 1)
 		{
+			unsigned int user_index = (unsigned char)BT_Data;
+			if (user_index >= (sizeof(user) / sizeof(user[0])))
+			{
+				BT_Flag = 0;
+				Uart_On = 1;
+				continue;
+			}
 			// printf("get_data!\r\n");
-			sprintf((char *)BT_string, "User %s score is a total of %d point\r\n\0", user[BT_Data].User_name, ++user[BT_Data].point);
+			sprintf((char *)BT_string, "User %s score is a total of %d point\r\n\0", user[user_index].User_name, ++user[user_index].point);
 			USART6_write(BT_string, 40);
 			memset(BT_string, 0, 40);
-			// printf("User %s score is a total of %d point\r\n", user[BT_Data].User_name, ++user[BT_Data].point);
+			// printf("User %s score is a total of %d point\r\n", user[user_index].User_name, ++user[user_index].point);
 			delay_ms(10000);
 			// Recycling Bin Check
 			for (int i = 0; i < 3; i++)

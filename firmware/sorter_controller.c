@@ -190,7 +190,7 @@ void Barcode_detector(void){
 
 
 	if (Barcode_flag==1 && user_flag==0){
-		for(int i=0 ; i<10 ; i++){
+		for(int i=0 ; i<(int)(sizeof(user_data)/sizeof(user_data[0])) ; i++){
 			if (!strcmp(user_data[i].user_bar,barcode)){
 				user_flag=1;
 				user_num=user_data[i].usernum;

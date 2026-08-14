@@ -42,7 +42,7 @@ The original course prototype used hardcoded demonstration identifiers. This por
 
 ## Build and verification boundary
 
-The application files depend on course-specific STM32F4 support headers and drivers that are intentionally not redistributed. Therefore this repository is **not a standalone firmware build**. The migration verification checks source structure, privacy removal, and static consistency; it does not claim a fresh hardware build or bench rerun.
+The application files depend on course-specific STM32F4 support headers and drivers that are intentionally not redistributed. Therefore this repository is **not a standalone firmware build**. The migration verification checks source structure, known privacy-sensitive values, and the sanitized user-table bounds; it does not claim a fresh hardware build or bench rerun.
 
 ## Limitations
 
