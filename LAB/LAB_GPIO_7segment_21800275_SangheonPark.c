@@ -8,6 +8,7 @@
 */
 
 #include "stm32f4xx.h"
+#include "ecSTM32F4v2.h"
 #include "ecRCC2.h"
 #include "ecGPIO2.h"
 
@@ -23,11 +24,14 @@ int main(void) {
 	
 	// Inifinite Loop ----------------------------------------------------------
 	while(1){
-		if(GPIO_read(BUTTON_PIN) == 0) cnt++;
-//		sevensegment_decoder(cnt % 10);		// for Problem 2
-		sevensegment_display(cnt % 10);	// for Problem 1
-		if (cnt > 9) cnt = 0;
-		for(int i = 0; i < 500000;i++);  // delay_ms(500);
+		if(GPIO_read(BUTTON_PIN) == 0){
+			cnt++;
+//			sevensegment_decoder(cnt % 10);		// for Problem 2
+			sevensegment_display(cnt % 10);	// for Problem 1
+			if (cnt > 9) cnt = 0;
+			delay_ms(100);
+//			for(int i = 0; i < 500000;i++);  // delay_ms(500);
+		} 
 	}
 }
 
@@ -36,6 +40,7 @@ int main(void) {
 void setup(void)
 {
 	RCC_HSI_init();
+	SysTick_init();
 	GPIO_init(BUTTON_PIN, INPUT);  		// calls RCC_GPIOC_enable()
 	GPIO_pupd(BUTTON_PIN, PULL_UP);
 	

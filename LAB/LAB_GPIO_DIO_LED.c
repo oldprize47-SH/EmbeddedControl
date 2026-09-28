@@ -21,7 +21,7 @@ void setup(void) {
 	
 	// Initialize the LED pin to the desired value:
 	GPIO_init(LED_PIN, OUTPUT);
-	GPIO_otype(LED_PIN,OPENDRAIN);
+	GPIO_otype(LED_PIN,PUSHPULL);
 	GPIO_pupd(LED_PIN,PULL_UP);
 	GPIO_ospeed(LED_PIN, MEDIUM_SPEED);
 }

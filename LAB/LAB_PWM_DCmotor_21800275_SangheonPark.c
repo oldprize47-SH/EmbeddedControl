@@ -10,13 +10,14 @@
 #include <stdlib.h>
 
 #define BUTTON_PIN 	PC_13
-#define DIR_PIN 		PC_2
+#define DIR_PIN 	PC_2
 #define PWM_PIN    	PA_0
-#define DIR					0 
+#define DIR			0 
 
 int count = 0;
 int Pause = 0;
-
+double duty = 0;
+double targetPWM = 0.0;
 void setup(void);
 	
 int main(void) { 	
@@ -30,14 +31,16 @@ void TIM3_IRQHandler(void){
 	
 	if(is_UIF(TIM3)){ // update interrupt flag
 		if(Pause){
-			PWM_duty(PWM_PIN, 0);			// Pause
+			targetPWM = 0;					// Pause
 		}else if(count < 4){
-			PWM_duty(PWM_PIN, 0.53); 	// Slow
+			targetPWM = 0.53; 			// Slow
 		}else{
-			PWM_duty(PWM_PIN, 1);			// Fast
+			targetPWM = 1;					// Fast
 		}
 		if(!Pause) count++;
 		if(count > 7) count = 0;
+		duty = fabs(DIR - targetPWM);
+		PWM_duty(PWM_PIN, duty);
 	}
 	clear_UIF(TIM3);   // clear by writing 0 
 } 

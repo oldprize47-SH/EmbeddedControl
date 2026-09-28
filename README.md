@@ -20,6 +20,12 @@ I completed the individual peripheral exercises as coursework. The RC car and re
 
 ## Build notes
 
-The archive does not include the complete original board project, startup files and linker configuration. This source snapshot has not been rebuilt or tested on hardware during the portfolio update. A separate local RC-car build does not establish that this archive builds as it stands.
+The RC-car program, selected peripheral labs and supporting files were updated from my local coursework on 28 September 2026. The [PlatformIO configuration](platformio.ini) builds the RC-car target for the Nucleo F411RE with the CMSIS framework:
+
+```sh
+pio run -e rc_car
+```
+
+This repository configuration built successfully during the update. It excludes the alternative `ecUART2_simple.c` implementation to avoid duplicate UART symbols. Existing compiler warnings remain, including ADC pointer types and printf argument types. This is a compile check for the RC-car target; it does not validate the recycling applications, board wiring, calibration or physical operation. No firmware was flashed.
 
 [Original repository](https://github.com/oldprize47/Embbadded_Controller_2024). Original history and attribution are retained.
