@@ -1,3 +1,19 @@
+# Automatic Recycling System
+
+**A two-board STM32 prototype that connects barcode input, sorting doors and bin-level monitoring.**
+
+| Part | What it does |
+|---|---|
+| **Board 1** | Barcode input, sorting actuators and deposit detection |
+| **Board 2** | Ultrasonic fill-level sensing and status messages |
+| **Team outcome** | Integrated course prototype; original demonstration linked below |
+
+**Ownership:** joint coursework; individual module ownership is not asserted. This curated repository remains private.
+
+![Project system overview](docs/images/circuit-diagram.png)
+
+## Detailed project record / 상세 기록
+
 # STM32 자동 분리수거 시스템
 
 STM32F411RE 기반 제어기 두 대가 바코드 입력, 분류 도어 구동, 투입 완료 감지, 적재량 측정, 사용자 포인트 갱신과 만재 알림을 분담하는 임베디드 시스템입니다. 2024년 임베디드 제어 과목에서 **2인 팀**으로 제작한 결과물을 포트폴리오에 맞게 재구성했습니다.
