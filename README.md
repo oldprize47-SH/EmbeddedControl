@@ -5,7 +5,7 @@
 <a id="korean"></a>
 ## 한국어
 
-이 저장소는 [임베디드 제어 프로젝트](https://github.com/oldprize47-SH/stm32-embedded-controller)의 자동 분리수거함 구성요소입니다. 전체 과목 프로젝트의 목표와 RC카·분리수거함 구성은 대표 문서에서 함께 설명합니다. 이곳에는 비공개 구현 코드와 세부 기록을 보관합니다.
+이 저장소는 [임베디드 제어 프로젝트](https://github.com/oldprize47-SH/stm32-embedded-controller)의 자동 분리수거함 구성요소입니다. 전체 과목 프로젝트의 목표와 RC카·분리수거함 구성을 함께 살펴보려면 대표 문서에서 시작할 수 있습니다. 이곳에는 해당 구성요소의 비공개 구현 코드와 세부 기록을 보관합니다.
 
 이 프로젝트는 하나의 투입구로 물품을 받아 등록된 바코드 정보에 따라 수거함을 선택하고, 사용자에게 포인트를 부여하며, 수거함이 가득 차면 알리는 분리수거함 시제품입니다. 2024년 임베디드 컨트롤러 수업에서 STM32F411RE 컨트롤러 두 개, 분류용 문, 투입 감지 센서, 초음파 적재 수준 센서를 사용해 제작했습니다.
 
@@ -27,7 +27,7 @@ AI로 생성한 개념도입니다. 장치의 외형, 인터페이스 배치, �
 
 ![자동 분리수거 시스템](docs/flowcharts/recycling.png)
 
-프로젝트 문서와 코드를 바탕으로 재구성한 개요입니다. 결과와 검증 범위의 한계는 아래에 설명합니다. [SVG](docs/flowcharts/recycling.svg)
+프로젝트 문서와 코드를 바탕으로 재구성한 개요입니다. 아래 설명에서 결과와 함께 확인된 범위와 검증의 한계를 살펴볼 수 있습니다. [SVG](docs/flowcharts/recycling.svg)
 
 ### 시스템 구성과 팀 역할
 
@@ -49,21 +49,21 @@ AI로 생성한 개념도입니다. 장치의 외형, 인터페이스 배치, �
 
 ### 소스
 
-애플리케이션은 [보드 1](firmware/board-1/app/main.c)과 [보드 2](firmware/board-2/app/main.c)에 있습니다. 각 보드에는 자체 지원 라이브러리 변형본이 있으며, 둘을 하나의 타깃으로 합쳐서는 안 됩니다.
+애플리케이션은 [보드 1](firmware/board-1/app/main.c)과 [보드 2](firmware/board-2/app/main.c)에 있습니다. 각 보드에는 자체 지원 라이브러리 변형본이 있으므로, 두 보드는 하나의 타깃으로 합치지 않고 각각의 타깃으로 유지해야 합니다.
 
 코드는 GPIO, PWM, 타이머, 입력 캡처, UART를 사용합니다. 일부 제어 경로에는 블로킹 지연이 사용되며, 보드 간 1바이트 페이로드에는 프레이밍, 체크섬 또는 최신 데이터인지 확인할 정보가 없습니다. 이는 원래 시제품의 한계입니다.
 
 ### 펌웨어를 읽는 방법
 
-첫 번째 보드의 애플리케이션은 투입 처리 순서로, 두 번째 보드의 애플리케이션은 상태 및 적재 수준 감시로 읽으면 됩니다. UART 수신에서 시작하여 해당 입력에 따른 판단과 그 결과로 발생하는 모터 동작 또는 메시지 출력을 따라가 보세요. 주변장치 보조 라이브러리만 따로 읽는 것보다 시스템을 이해하는 데 도움이 됩니다.
+첫 번째 보드에서는 투입 처리 순서를, 두 번째 보드에서는 상태 및 적재 수준 감시를 중심으로 읽으면 흐름을 이해하기 쉽습니다. UART 수신에서 시작해 입력에 따른 판단, 이어지는 모터 동작 또는 메시지 출력을 차례로 살펴볼 수 있습니다. 이 흐름과 주변장치 보조 라이브러리를 함께 읽으면 각 함수가 시스템에서 맡은 역할을 이해하는 데 도움이 됩니다.
 
-보관된 보고서와 소스 사이에는 일부 핀 및 UART 표기가 서로 다르므로, 검증된 배선 지침으로 사용할 수는 없습니다. 보고서에는 초음파 센서 세 개를 함께 사용할 때 발생한 오류도 기록되어 있지만, 현재 근거만으로는 실험적으로 입증된 단일 원인을 확정할 수 없습니다. 시연과 소스는 시제품을 설명하는 자료이며, 다시 제작하려면 보드 구성을 대조해 불일치를 해소해야 합니다.
+배선을 살펴볼 때는 보관된 보고서와 소스의 일부 핀 및 UART 표기가 서로 다르다는 점을 함께 확인해야 합니다. 이 불일치가 있어 현재 자료를 검증된 배선 지침으로 사용할 수는 없습니다. 보고서에는 초음파 센서 세 개를 함께 사용할 때 발생한 오류도 기록되어 있지만, 현재 근거만으로는 실험적으로 입증된 단일 원인을 확정할 수 없습니다. 시연과 소스는 시제품을 설명하는 자료이며, 다시 제작하려면 보드 구성을 대조해 불일치를 해소해야 합니다.
 
 ### 빌드 참고 사항
 
-원래 IDE 프로젝트, 시작 파일, 링커 스크립트, 완전한 STM32Cube/CMSIS 환경이 누락되어 있습니다. 이 저장소를 별도로 컴파일하거나 펌웨어를 보드에 기록하거나 하드웨어에서 다시 시험하지 않았습니다. [BUILDING.md](BUILDING.md)에 누락된 의존성을 기록했으며, [기술 노트](docs/기술-요약.md)에는 소스와 배선에 대한 설명이 있습니다.
+빌드를 준비하려면 현재 자료에 없는 원래 IDE 프로젝트, 시작 파일, 링커 스크립트, 완전한 STM32Cube/CMSIS 환경이 필요합니다. 이 저장소를 별도로 컴파일하거나 펌웨어를 보드에 기록하거나 하드웨어에서 다시 시험하지 않았습니다. [BUILDING.md](BUILDING.md)에 누락된 의존성을 기록했으며, [기술 노트](docs/기술-요약.md)에는 소스와 배선에 대한 설명이 있습니다.
 
-개인 바코드 테스트 데이터는 합성 값으로 교체했습니다. 공동 작성 코드와 수업 라이브러리의 재배포 권리가 해결되지 않은 동안 저장소는 비공개로 유지됩니다. [ATTRIBUTION.md](ATTRIBUTION.md)와 [NOTICE.md](NOTICE.md)를 참고하세요.
+개인 바코드 테스트 데이터는 합성 값으로 교체했습니다. 공동 작성 코드와 수업 라이브러리의 재배포 권리가 해결되지 않은 동안 저장소는 비공개로 유지됩니다. [ATTRIBUTION.md](ATTRIBUTION.md)와 [NOTICE.md](NOTICE.md)에서 관련 내용을 확인할 수 있습니다.
 
 ---
 
@@ -72,7 +72,7 @@ AI로 생성한 개념도입니다. 장치의 외형, 인터페이스 배치, �
 
 **Automatic Recycling System**
 
-This repository holds the automatic recycling component of [Embedded Control Projects](https://github.com/oldprize47-SH/stm32-embedded-controller). The main documentation groups the course goals, RC car and recycling system together. This repository retains the private implementation and component records.
+This repository holds the automatic recycling component of [Embedded Control Projects](https://github.com/oldprize47-SH/stm32-embedded-controller). For the course goals and the RC car and recycling system together, the main documentation is a helpful starting point. This repository keeps the private implementation and records for the recycling component.
 
 This project is a recycling-bin prototype that accepts an item through one entrance, selects a bin from registered barcode information, awards user points and reports when a bin is full. It was built for the 2024 Embedded Controller course using two STM32F411RE controllers, sorting doors, a deposit sensor and ultrasonic level sensors.
 
@@ -94,7 +94,7 @@ A similar system could support an indoor recycling station in a university or of
 
 ![Automatic recycling system](docs/flowcharts/recycling.png)
 
-Overview reconstructed from the documented project and code. Results and verification limits are described below. [SVG](docs/flowcharts/recycling.svg)
+This overview is reconstructed from the project documentation and code. The sections below explain the results, what was checked and the limits of that verification. [SVG](docs/flowcharts/recycling.svg)
 
 ### System configuration and team
 
@@ -116,18 +116,18 @@ The separately tested parts were assembled into a physical mechanism, with senso
 
 ### Source
 
-The applications are in [board 1](firmware/board-1/app/main.c) and [board 2](firmware/board-2/app/main.c). Each board has its own support-library variant; the two should not be combined into one target.
+The applications are in [board 1](firmware/board-1/app/main.c) and [board 2](firmware/board-2/app/main.c). Each board has its own support-library variant, so the two need to remain separate targets rather than being combined into one.
 
 The code uses GPIO, PWM, timers, input capture and UART. Some control paths use blocking delays, and the one-byte inter-board payload has no framing, checksum or freshness information. These are limitations of the original prototype.
 
 ### How to read the firmware
 
-Read the first board's application as the deposit sequence and the second board's application as status and level monitoring. Follow the UART reception, the decision made from that input, and the resulting motor or message output. This is more informative than reading the peripheral helper library in isolation.
+A helpful way into the firmware is to follow the deposit sequence on the first board and status and level monitoring on the second. Starting at UART reception, you can trace the decision made from the input and the resulting motor or message output. Reading the peripheral helpers alongside that flow makes their role in the system easier to understand.
 
-The archived report and source contain some differences in pin and UART labels, so they are not a verified wiring recipe. The report also records errors when using three ultrasonic sensors together, but the available evidence does not establish a single experimentally proven cause. The demonstration and the source explain the prototype; rebuilding it requires reconciling the board setup.
+When reviewing the wiring, keep the archived report and source side by side: some pin and UART labels differ. Those differences mean the material cannot yet serve as a verified wiring guide. The report also records errors when using three ultrasonic sensors together, but the available evidence does not establish a single experimentally proven cause. The demonstration and the source explain the prototype; rebuilding it requires reconciling the board setup.
 
 ### Build notes
 
-The original IDE project, startup file, linker script and complete STM32Cube/CMSIS environment are missing. The repository has not been independently compiled, flashed or retested on hardware. [BUILDING.md](BUILDING.md) records the missing dependencies, and the [technical notes](docs/기술-요약.md) describe the source and wiring.
+Preparing a build requires the original IDE project, startup file, linker script and complete STM32Cube/CMSIS environment, which are missing from the archive. The repository has not been independently compiled, flashed or retested on hardware. [BUILDING.md](BUILDING.md) records the missing dependencies, and the [technical notes](docs/기술-요약.md) describe the source and wiring.
 
-Personal barcode fixtures have been replaced with synthetic values. The repository remains private while joint-code and course-library redistribution rights are unresolved. See [ATTRIBUTION.md](ATTRIBUTION.md) and [NOTICE.md](NOTICE.md).
+Personal barcode fixtures have been replaced with synthetic values. The repository remains private while joint-code and course-library redistribution rights are unresolved. Details are available in [ATTRIBUTION.md](ATTRIBUTION.md) and [NOTICE.md](NOTICE.md).
