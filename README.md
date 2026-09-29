@@ -5,7 +5,7 @@
 <a id="korean"></a>
 ## 한국어
 
-이 문서는 임베디드 제어 과목의 대표 문서입니다. 주변장치 실습, RC카와 자동 분리수거함을 한 프로젝트 묶음으로 설명합니다. 별도 분리수거함 저장소는 구현 코드를 보관하는 비공개 구성요소 저장소이며, 별개의 포트폴리오 프로젝트로 구분하지 않습니다.
+이 문서에서 임베디드 제어 과목의 주변장치 실습, RC카와 자동 분리수거함을 한 프로젝트 묶음으로 살펴볼 수 있습니다. 전체 프로젝트를 안내하는 대표 문서이며, 별도 분리수거함 저장소는 이 묶음에 속한 구현 코드를 보관하는 비공개 구성요소 저장소입니다. 따라서 분리수거함을 별개의 포트폴리오 프로젝트로 구분하지 않습니다.
 
 이 저장소에는 2024년 임베디드 컨트롤러 수업에서 수행한 STM32F411 주변장치 실습과 두 프로젝트인 라인 추종 RC카 및 자동 분리수거 시스템이 담겨 있습니다. GPIO, 타이머, PWM, 센서 입력, 직렬 통신을 C로 제어하는 실제 기구에 연결한 작업입니다.
 
@@ -25,7 +25,7 @@ RC카는 경로 추종, 수동 제어, 장애물 감지 시 정지 동작을 가
 
 초기 실습에서는 마이크로컨트롤러의 각 기능을 하나씩 분리해 다룹니다. GPIO와 외부 인터럽트는 스위치와 간단한 출력을 처리합니다. 타이머는 일정한 시간 간격을 만들고, PWM은 모터 명령을 조절하며, 입력 캡처는 초음파 센서의 에코 펄스 지속 시간을 측정합니다. 이후 프로젝트에서는 이 기능들을 결합하여 센서 측정값이 프로그램의 상태에 영향을 주고, 그 상태가 액추에이터 출력으로 이어지도록 합니다.
 
-이러한 순서로 자료를 살펴보면 이해하기 좋습니다. 개별 주변장치 실습에서 시작한 뒤, 같은 종류의 입력이나 출력이 RC카 또는 분리수거 시스템에서 어떻게 쓰이는지 확인할 수 있습니다. [lib](lib)의 지원 함수에는 수업 제공 자료와 과제에 사용한 작업 내용이 함께 포함되어 있습니다.
+처음 살펴볼 때는 개별 주변장치 실습에서 시작하면 흐름을 이해하기 쉽습니다. 이어서 같은 종류의 입력이나 출력이 RC카 또는 분리수거 시스템에서 어떻게 쓰이는지 확인할 수 있습니다. [lib](lib)의 지원 함수에는 수업 제공 자료와 과제에 사용한 작업 내용이 함께 포함되어 있습니다.
 
 ### 프로젝트 구성과 팀 역할
 
@@ -63,7 +63,7 @@ RC카는 DC 모터 두 개, 적외선 반사 센서, 초음파 센서, 블루투
 
 [벡터 도식](docs/flowcharts/embedded-labs.svg)
 
-개별 실습은 박상헌의 수업 과제입니다. 지원 라이브러리에는 수업에서 제공한 자료와 공동 수정 사항도 포함되어 있습니다. 위에 명시한 애플리케이션 작성 역할이 어느 팀이든 모든 지원 함수를 독자적으로 작성했다는 뜻은 아닙니다.
+개별 실습은 박상헌의 수업 과제입니다. 지원 라이브러리에는 수업에서 제공한 자료와 공동 수정 사항도 포함되어 있습니다. 위의 역할 설명은 애플리케이션 작성에 관한 것으로, 어느 팀이든 모든 지원 함수를 독자적으로 작성했다는 의미는 아닙니다. 지원 코드의 기여 범위는 수업 자료와 공동 수정 사항을 함께 보아야 합니다.
 
 ### 파일
 
@@ -85,7 +85,7 @@ RC카 프로그램, 일부 주변장치 실습, 지원 파일은 2026년 9월 28
 pio run -e rc_car
 ```
 
-업데이트 당시 이 저장소 설정으로 빌드에 성공했습니다. UART 심볼 중복을 피하기 위해 대체 구현인 `ecUART2_simple.c`는 제외합니다. ADC 포인터 자료형과 printf 인자 자료형 등을 포함한 기존 컴파일러 경고는 남아 있습니다. 이는 RC카 타깃의 컴파일 확인이며, 분리수거 애플리케이션, 보드 배선, 보정 또는 실제 동작을 검증한 것은 아닙니다. 펌웨어를 보드에 기록하지 않았습니다.
+업데이트 당시 이 저장소 설정으로 빌드에 성공했습니다. UART 심볼 중복을 피하기 위해 대체 구현인 `ecUART2_simple.c`는 제외합니다. ADC 포인터 자료형과 printf 인자 자료형 등을 포함한 기존 컴파일러 경고는 남아 있습니다. 이 결과로 확인할 수 있는 범위는 RC카 타깃의 컴파일입니다. 분리수거 애플리케이션, 보드 배선, 보정 또는 실제 동작은 이번 확인에 포함되지 않았으며, 펌웨어를 보드에 기록하지 않았습니다.
 
 [원본 저장소](https://github.com/oldprize47/Embbadded_Controller_2024). 원래의 이력과 저작자 표기를 유지합니다.
 
@@ -102,7 +102,7 @@ pio run -e rc_car
 
 **Embedded Control Projects**
 
-This is the main documentation for the embedded-control course work, covering peripheral exercises, the RC car and the automatic recycling system. The separate recycling repository is a private implementation archive for one component, not another portfolio project.
+This main guide brings together the embedded-control course work: peripheral exercises, the RC car and the automatic recycling system. The separate recycling repository keeps the implementation of that component in a private archive. It belongs to this project group and is not a separate portfolio project.
 
 This repository contains STM32F411 peripheral exercises and two projects from the 2024 Embedded Controller course: a line-following RC car and an automatic recycling system. The work connects GPIO, timers, PWM, sensor inputs and serial communication to physical mechanisms controlled in C.
 
@@ -122,7 +122,7 @@ The RC car is a small platform for teaching path following, manual control and o
 
 The earlier labs isolate one part of the microcontroller at a time. GPIO and external interrupts handle switches and simple outputs. Timers provide repeatable timing, PWM changes the motor command, and input capture measures the duration of an ultrasonic sensor's echo pulse. The later projects combine these functions, so a sensor reading affects the program's state and then the actuator output.
 
-This progression is the useful way to read the archive: begin with an individual peripheral exercise, then look at how the same kind of input or output appears in the RC car or recycling system. The support functions in [lib](lib) include course material as well as work used in the assignments.
+If you are exploring the archive for the first time, an individual peripheral exercise is a helpful starting point. From there, you can follow the same kind of input or output into the RC car or recycling system. The support functions in [lib](lib) include course material as well as work used in the assignments.
 
 ### Project configuration and team
 
@@ -160,7 +160,7 @@ The recycling system recognises a user and item from barcode information, select
 
 [Vector diagram](docs/flowcharts/embedded-labs.svg)
 
-The individual labs are Sangheon Park's coursework. The support library also contains supplied course material and shared modifications. The application authorship above does not imply that either team independently authored every support function.
+The individual labs are Sangheon Park's coursework. The support library also contains supplied course material and shared modifications. The roles above describe application work; they do not mean that either team independently wrote every support function. Reading them alongside the supplied material and shared modifications gives a fuller picture of the contributions.
 
 ### Files
 
@@ -182,7 +182,7 @@ The RC-car program, selected peripheral labs and supporting files were updated f
 pio run -e rc_car
 ```
 
-This repository configuration built successfully during the update. It excludes the alternative `ecUART2_simple.c` implementation to avoid duplicate UART symbols. Existing compiler warnings remain, including ADC pointer types and printf argument types. This is a compile check for the RC-car target; it does not validate the recycling applications, board wiring, calibration or physical operation. No firmware was flashed.
+This repository configuration built successfully during the update. It excludes the alternative `ecUART2_simple.c` implementation to avoid duplicate UART symbols. Existing compiler warnings remain, including ADC pointer types and printf argument types. This result confirms compilation of the RC-car target. The recycling applications, board wiring, calibration and physical operation remain outside that check, and no firmware was flashed.
 
 [Original repository](https://github.com/oldprize47/Embbadded_Controller_2024). Original history and attribution are retained.
 
