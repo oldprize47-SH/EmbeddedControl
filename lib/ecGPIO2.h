@@ -1,8 +1,8 @@
 /*----------------------------------------------------------------
-@ Embedded Controller by Young-Keun Kim - Handong Global University
-Author           : SangheonPark
+@ Embedded Controller by course instructor (name redacted) - Handong Global University
+Author           : portfolio-owner variant
 Created          : 2024-09-10
-Modified         : 2024-09-22 
+Modified         : 2024-09-22
 Language/ver     : C++ in Keil uVision
 
 Description      : Distributed to Students for LAB_GPIO
@@ -43,8 +43,8 @@ Description      : Distributed to Students for LAB_GPIO
 #ifdef __cplusplus
  extern "C" {
 #endif /* __cplusplus */
-	 
-void GPIO_init(PinName_t pinName, uint32_t mode);     
+
+void GPIO_init(PinName_t pinName, uint32_t mode);
 void GPIO_write(PinName_t pinName, int Output);
 int  GPIO_read(PinName_t pinName);
 void GPIO_mode(PinName_t pinName, uint32_t mode);

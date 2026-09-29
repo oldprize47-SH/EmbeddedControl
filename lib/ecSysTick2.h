@@ -1,8 +1,8 @@
 /*----------------------------------------------------------------
-@ Embedded Controller by Young-Keun Kim - Handong Global University
-Author           : SangheonPark
+@ Embedded Controller by course instructor (name redacted) - Handong Global University
+Author           : portfolio-owner variant
 Created          : 2024-09-28
-Modified         : 2024-09-28 
+Modified         : 2024-09-28
 Language/ver     : C++ in Keil uVision
 
 Description      : Distributed to Students for LAB_EXTI_SysTick

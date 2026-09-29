@@ -1,7 +1,7 @@
 /**
 ******************************************************************************
-* @author  SangheonPark
-* @Mod	   2024-10-06 by PSH
+* @author  portfolio-owner variant
+* @Mod	   2024-10-06 by portfolio owner
 * @brief   Embedded Controller:  EC_HAL
 *
 ******************************************************************************
@@ -26,7 +26,7 @@ void PWM_pinmap(PinName_t pinName, TIM_TypeDef **TIMx, int *chN);
 
 /* PWM PERIOD SETUP */
 // allowable range for msec:  1~2,000
-void PWM_period(PinName_t pinName,  uint32_t msec);	
+void PWM_period(PinName_t pinName,  uint32_t msec);
 void PWM_period_ms(PinName_t pinName,  uint32_t msec);	// same as PWM_period()
 // allowable range for usec:  1~1,000
 void PWM_period_us(PinName_t pinName, uint32_t usec);

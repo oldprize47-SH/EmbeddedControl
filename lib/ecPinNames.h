@@ -1,6 +1,6 @@
 /*----------------------------------------------------------------
-@ Embedded Controller by Young-Keun Kim - Handong Global University
-Author           : SangheonPark
+@ Embedded Controller by course instructor (name redacted) - Handong Global University
+Author           : portfolio-owner variant
 Created          : 2024-09-10
 Modified         : 2024-09-10
 Language/ver     : C in Keil uVision
@@ -46,10 +46,10 @@ typedef enum {
 
 typedef enum {
     PA_0  = 0x00,
-    PA_1  = 0x01,    
+    PA_1  = 0x01,
     PA_2  = 0x02,
     PA_3  = 0x03,
-    PA_4  = 0x04,    
+    PA_4  = 0x04,
     PA_5  = 0x05,
     PA_6  = 0x06,
     PA_7  = 0x07,
@@ -61,7 +61,7 @@ typedef enum {
     PA_13 = 0x0D,
     PA_14 = 0x0E,
     PA_15 = 0x0F,
-    
+
     PB_0  = 0x10,
     PB_1  = 0x11,
     PB_2  = 0x12,
@@ -95,7 +95,7 @@ typedef enum {
     PC_14 = 0x2E,
     PC_15 = 0x2F,
 
-		PD_0  = 0x30,
+        PD_0  = 0x30,
     PD_1  = 0x31,
     PD_2  = 0x32,
     PD_3  = 0x33,
@@ -112,7 +112,7 @@ typedef enum {
     PD_14 = 0x3E,
     PD_15 = 0x3F,
 
-		PE_0  = 0x40,
+        PE_0  = 0x40,
     PE_1  = 0x41,
     PE_2  = 0x42,
     PE_3  = 0x43,
@@ -128,8 +128,8 @@ typedef enum {
     PE_13 = 0x4D,
     PE_14 = 0x4E,
     PE_15 = 0x4F,
-		
-		PF_0  = 0x50,
+
+        PF_0  = 0x50,
     PF_1  = 0x51,
     PF_2  = 0x52,
     PF_3  = 0x53,
@@ -145,8 +145,8 @@ typedef enum {
     PF_13 = 0x5D,
     PF_14 = 0x5E,
     PF_15 = 0x5F,
-		
-		PG_0  = 0x60,
+
+        PG_0  = 0x60,
     PG_1  = 0x61,
     PG_2  = 0x62,
     PG_3  = 0x63,
@@ -162,8 +162,8 @@ typedef enum {
     PG_13 = 0x6D,
     PG_14 = 0x6E,
     PG_15 = 0x6F,
-		
-		PH_0  = 0x70,
+
+        PH_0  = 0x70,
     PH_1  = 0x71,
     PH_2  = 0x72,
     PH_3  = 0x73,

@@ -1,8 +1,8 @@
 /*----------------------------------------------------------------
-@ Embedded Controller by Young-Keun Kim - Handong Global University
-Author           : SangheonPark
+@ Embedded Controller by course instructor (name redacted) - Handong Global University
+Author           : portfolio-owner variant
 Created          : 2024-09-28
-Modified         : 2024-09-28 
+Modified         : 2024-09-28
 Language/ver     : C++ in Keil uVision
 
 Description      : Distributed to Students for LAB_EXTI_SysTick
@@ -19,41 +19,41 @@ volatile uint32_t msTicks;
 
 //EC_SYSTEM_CLK
 
-void SysTick_init(void){	
-	//  SysTick Control and Status Register
-	SysTick->CTRL = 0;											// Disable SysTick IRQ and SysTick Counter
+void SysTick_init(void){
+    //  SysTick Control and Status Register
+    SysTick->CTRL = 0;											// Disable SysTick IRQ and SysTick Counter
 
-	// Select processor clock
-	// 1 = processor clock;  0 = external clock
-	SysTick->CTRL |= SysTick_CTRL_CLKSOURCE_Msk;
+    // Select processor clock
+    // 1 = processor clock;  0 = external clock
+    SysTick->CTRL |= SysTick_CTRL_CLKSOURCE_Msk;
 
-	// uint32_t MCU_CLK=EC_SYSTEM_CLK
-	// SysTick Reload Value Register
-	SysTick->LOAD = MCU_CLK_PLL / 1000 - 1;						// 1ms, for HSI PLL = 84MHz.
+    // uint32_t MCU_CLK=EC_SYSTEM_CLK
+    // SysTick Reload Value Register
+    SysTick->LOAD = MCU_CLK_PLL / 1000 - 1;						// 1ms, for HSI PLL = 84MHz.
 
-	// SysTick Current Value Register
-	SysTick->VAL = 0;
+    // SysTick Current Value Register
+    SysTick->VAL = 0;
 
-	// Enables SysTick exception request
-	// 1 = counting down to zero asserts the SysTick exception request
-	SysTick->CTRL |= SysTick_CTRL_TICKINT_Msk;
-	
-	// Enable SysTick IRQ and SysTick Timer
-	SysTick->CTRL |= SysTick_CTRL_ENABLE_Msk;
-		
-	NVIC_SetPriority(SysTick_IRQn, 1);		// Set Priority to 1
-	NVIC_EnableIRQ(SysTick_IRQn);			// Enable interrupt in NVIC
+    // Enables SysTick exception request
+    // 1 = counting down to zero asserts the SysTick exception request
+    SysTick->CTRL |= SysTick_CTRL_TICKINT_Msk;
+
+    // Enable SysTick IRQ and SysTick Timer
+    SysTick->CTRL |= SysTick_CTRL_ENABLE_Msk;
+
+    NVIC_SetPriority(SysTick_IRQn, 1);		// Set Priority to 1
+    NVIC_EnableIRQ(SysTick_IRQn);			// Enable interrupt in NVIC
 }
 
 
 
 void SysTick_Handler(void){
-	SysTick_counter();	
+    SysTick_counter();
 }
 
 void SysTick_counter(){
-	msTicks++;
-}	
+    msTicks++;
+}
 
 
 void delay_ms (uint32_t mesc){
@@ -61,12 +61,12 @@ void delay_ms (uint32_t mesc){
 
   curTicks = msTicks;
   while ((msTicks - curTicks) < mesc);
-	
+
   msTicks = 0;
 }
 
 //void delay_ms(uint32_t msec){
-//	uint32_t now=SysTick_val(); 
+//	uint32_t now=SysTick_val();
 //	if (msec>5000) msec=5000;
 //	if (msec<1) msec=1;
 //	while ((now - SysTick_val()) < msec);
@@ -75,15 +75,15 @@ void delay_ms (uint32_t mesc){
 
 void SysTick_reset(void)
 {
-	// SysTick Current Value Register
-	SysTick->VAL = 0;
+    // SysTick Current Value Register
+    SysTick->VAL = 0;
 }
 
 uint32_t SysTick_val(void) {
-	return SysTick->VAL;
+    return SysTick->VAL;
 }
 
 //void SysTick_counter(){
 //	msTicks++;
 //	if(msTicks%1000 == 0) count++;
-//}	
+//}

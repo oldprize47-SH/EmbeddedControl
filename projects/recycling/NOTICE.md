@@ -16,7 +16,7 @@
 
 ## course/shared support
 
-`firmware/board-1/support`와 `firmware/board-2/support`는 수업용 STM32 support layer의 서로 다른 팀 변형입니다. 조직/수업 출처 표기는 유지했고, 학생 개인 이름은 privacy를 위해 역할 표기로 치환했습니다. 파일별 분류는 `ATTRIBUTION.md`에 있습니다.
+보드 1의 `firmware/board-1/support`와 보드 2가 사용하는 루트 `lib`는 수업용 STM32 support layer의 서로 다른 팀 변형입니다. 보드 2의 과거 support 사본은 토큰이 같은 루트 구현으로 통합했습니다. 조직/수업 출처 표기는 유지했고, 학생 개인 이름은 privacy를 위해 역할 표기로 치환했습니다. 파일별 분류는 `ATTRIBUTION.md`에 있습니다.
 
 ## 이미지와 영상
 
@@ -37,3 +37,5 @@ STM32Cube/CMSIS, startup, linker script와 vendor manual은 포함하지 않습�
 - 보고서 대신 개인정보가 없는 기술 요약 작성
 
 이 NOTICE는 권리 포기가 아니라 저장소의 제한된 portfolio 목적과 불확실한 라이선스 경계를 명확히 하기 위한 문서입니다.
+
+통합본 전체와 병합 부모 이력도 이 제한을 따릅니다. [루트 NOTICE](../../NOTICE.md)를 확인하세요.

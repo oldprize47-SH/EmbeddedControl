@@ -1,5 +1,11 @@
 # 빌드 및 검증 경계
 
+## 이번 로컬 통합에서 확인한 것 (2026-09-29)
+
+설치되어 있던 GNU Arm 도구와 CMSIS 헤더로 보드 1의 10개, 보드 2의 9개 translation unit을 각각 object로 컴파일했습니다(앱 포함, 모두 exit 0). 보드 1은 전용 support include 경로만, 보드 2는 루트 lib만 사용했습니다. 기존 경고는 남아 있습니다. 이는 include/API 호환성과 개별 컴파일 확인이며 startup·linker를 포함한 두 실행 파일의 링크 성공이나 실물 동작 검증은 아닙니다. RC카만 PlatformIO clean build까지 확인했습니다. 정확한 도구 경로·flags·명령·로그는 checkout 옆 `embedded-receipt.json`에 있습니다.
+
+During local consolidation, all 10 board-1 and 9 board-2 translation units compiled to objects using the installed GNU Arm compiler and CMSIS headers, with separate support include paths. Existing warnings remain. No recycling executable was linked or flashed; only the RC target received a complete PlatformIO clean build.
+
 ## 현재 상태
 
 이 저장소는 STM32F411RE용 응용 코드와 해당 응용 코드가 참조하는 최소 course/shared support 소스를 포함합니다. 그러나 vendor startup/CMSIS 전체, linker script, IDE project, 확정된 compiler version이 없어 **checkout 직후 독립 빌드할 수 있는 상태가 아닙니다**.
@@ -8,7 +14,7 @@
 
 ## Target 분리
 
-Board 1과 Board 2는 동일한 헤더/함수 이름을 갖는 서로 다른 support 변형을 사용합니다. 반드시 별도 executable target으로 구성합니다.
+Board 1은 전용 support 변형을, Board 2는 RC카와 같은 루트 `lib`를 사용합니다. 동일한 이름의 함수가 있어도 두 구현을 섞으면 안 됩니다. 반드시 별도 executable target으로 구성합니다.
 
 ### Board 1 source set
 
@@ -47,9 +53,9 @@ Board 1과 Board 2는 동일한 헤더/함수 이름을 갖는 서로 다른 sup
 - `ecTIM2.c`
 - `ecUART2.c`
 
-헤더는 `firmware/board-2/support/*.h` 전체를 include path에 둡니다. 집합 헤더가 선언 헤더들을 연쇄 포함하기 때문입니다.
+위 Board 2 구현 8개는 저장소 루트 `lib`에서 선택합니다. 헤더 include path 역시 루트 `lib`이며 컴포넌트 기준으로는 `../../lib`입니다. 집합 헤더가 선언 헤더들을 연쇄 포함하기 때문입니다.
 
-두 support 폴더를 하나의 include path 또는 target source list에 동시에 넣지 마세요. 동일 심볼의 구현이 충돌하거나 잘못된 보드 변형이 선택될 수 있습니다.
+Board 1 support와 루트 lib를 하나의 include path 또는 target source list에 동시에 넣지 마세요. 동일 심볼의 구현이 충돌하거나 잘못된 보드 변형이 선택될 수 있습니다.
 
 ## 외부에서 준비해야 할 항목
 
@@ -76,8 +82,8 @@ board-1 target
 
 board-2 target
   app:     firmware/board-2/app/main.c
-  support: firmware/board-2/support/*.c 중 위 8개
-  include: firmware/board-2/support + CMSIS/Device include
+  support: ../../lib/*.c 중 위 8개 (전체 glob 금지)
+  include: ../../lib + CMSIS/Device include
 ```
 
 Clock 관련 support 코드는 84 MHz PLL을 전제로 작성되어 있습니다. 실제 clock tree와 flash wait state 설정이 target board, voltage와 맞는지 reference manual/board configuration으로 다시 확인해야 합니다.
@@ -101,7 +107,7 @@ Clock 관련 support 코드는 84 MHz PLL을 전제로 작성되어 있습니다
 5. firmware size가 flash/RAM 한도 내임
 6. board별 binary와 source revision/hash가 기록됨
 
-현재 저장소 정리에서는 위 빌드를 실행하지 않았습니다.
+분리수거 두 타깃의 독립 compile/link 빌드는 이번 통합에서도 완료하지 않았습니다. RC카 PlatformIO 빌드 결과와 혼동하지 마세요. 소스 계약 테스트의 진입점은 통합 저장소 루트에서 `python projects/recycling/tests/test_source_contract.py`입니다.
 
 ## 실물 검증 안전 순서
 

@@ -37,9 +37,9 @@
 // APB2
 // **********************************************************
 
-// Configuration UART 1, 2 using default pins 
+// Configuration UART 1, 2 using default pins
 void UART1_init(void);
-void UART2_init(void);	
+void UART2_init(void);
 void UART6_init(void);
 void UART1_baud(uint32_t baud);
 void UART2_baud(uint32_t baud);
@@ -49,7 +49,7 @@ void UART6_baud(uint32_t baud);
 void USART1_write(uint8_t* buffer, uint32_t nBytes);
 void USART2_write(uint8_t* buffer, uint32_t nBytes);
 void USART6_write(uint8_t* buffer, uint32_t nBytes);
-uint8_t USART1_read(void);										
+uint8_t USART1_read(void);
 uint8_t USART2_read(void);
 uint8_t USART6_read(void);
 
@@ -60,11 +60,11 @@ uint32_t is_USART6_RXNE(void);
 
 // private functions
 void USART_write(USART_TypeDef* USARTx, uint8_t* buffer, uint32_t nBytes);
-void USART_init(USART_TypeDef* USARTx, uint32_t baud);  		
-void UART_baud(USART_TypeDef* USARTx, uint32_t baud);											
+void USART_init(USART_TypeDef* USARTx, uint32_t baud);
+void UART_baud(USART_TypeDef* USARTx, uint32_t baud);
 uint32_t is_USART_RXNE(USART_TypeDef * USARTx);
-uint8_t USART_read(USART_TypeDef * USARTx);										
-void USART_setting(USART_TypeDef* USARTx, PinName_t pin_GPIO_TX, PinName_t pin_GPIO_RX, uint32_t baud); 
-void USART_delay(uint32_t us);  
+uint8_t USART_read(USART_TypeDef * USARTx);
+void USART_setting(USART_TypeDef* USARTx, PinName_t pin_GPIO_TX, PinName_t pin_GPIO_RX, uint32_t baud);
+void USART_delay(uint32_t us);
 
 #endif // __EC_USART2_H

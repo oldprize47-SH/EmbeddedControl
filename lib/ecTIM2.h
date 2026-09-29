@@ -1,13 +1,13 @@
 /**
 ******************************************************************************
-* @author  SangheonPark
-* @Mod	   2024-10-06 by PSH
+* @author  portfolio-owner variant
+* @Mod	   2024-10-06 by portfolio owner
 * @brief   Embedded Controller:  EC_HAL
 *
 ******************************************************************************
 */
 
-#ifndef __EC_TIM2_H 
+#ifndef __EC_TIM2_H
 #define __EC_TIM2_H
 #include "ecSTM32F4v2.h"
 
@@ -30,9 +30,9 @@ void TIM_period_us(TIM_TypeDef* TIMx, uint32_t usec);  // usec of TimerUEV with 
 
 /* Timer UI Interrupt Configuration */
 ///////  Step1:   Initialize TIM_UI with TIMERx
-void TIM_UI_init(TIM_TypeDef* TIMx, uint32_t msec); 
+void TIM_UI_init(TIM_TypeDef* TIMx, uint32_t msec);
 
-///////  Step2:   Start by Enabling TIM_UI 
+///////  Step2:   Start by Enabling TIM_UI
 void TIM_UI_enable(TIM_TypeDef* TIMx);
 void TIM_UI_disable(TIM_TypeDef* TIMx);
 
@@ -40,11 +40,11 @@ uint32_t is_UIF(TIM_TypeDef *TIMx);
 void clear_UIF(TIM_TypeDef *TIMx);
 
 
-///////  Example Code 1:  Configure TIM2 with 100usec 
+///////  Example Code 1:  Configure TIM2 with 100usec
 // void setup(){
-//	TIM_UI_init(TIM3);	
+//	TIM_UI_init(TIM3);
 //	TIM_period(TIM3, 500);	// msec = 500 (Only range 1 to 655 is allowed)
-//   
+//
 // }
 
 
@@ -53,4 +53,4 @@ void clear_UIF(TIM_TypeDef *TIMx);
 }
 #endif /* __cplusplus */
 
-#endif // __EC_TIM2_H 
+#endif // __EC_TIM2_H

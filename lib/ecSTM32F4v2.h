@@ -1,8 +1,8 @@
 /**
 ******************************************************************************
 * @course   Embedded Controller- HGU
-* @author	SangheonPark
-* @mod		2024-9-27 by PSH
+* @author	portfolio-owner variant
+* @mod		2024-9-27 by portfolio owner
 * @brief	STM32F411 Library for EC
 *
 ******************************************************************************
@@ -31,7 +31,3 @@
 #include "ecUART2.h"
 
 #endif
-
-
-
- 

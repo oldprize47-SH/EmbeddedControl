@@ -29,9 +29,9 @@ void ADC_init(PinName_t pinName);
 void JADC_init(PinName_t pinName);
 
 
-// Multi-Channel Scan Sequence 
-void ADC_sequence(PinName_t *seqCHn, int seqCHnums); 
-void JADC_sequence(PinName_t *seqCHn, int seqCHnums); 
+// Multi-Channel Scan Sequence
+void ADC_sequence(PinName_t *seqCHn, int seqCHnums);
+void JADC_sequence(PinName_t *seqCHn, int seqCHnums);
 
 // ADC start
 void ADC_start(void);
@@ -55,7 +55,7 @@ uint32_t JADC_read(int JDRn);
 // Advanced Setting
 /////////////////////////////////////////////////////
 // Conversion mode change: CONT, SINGLE / Operate both ADC,JADC
-void ADC_conversion(int convMode); 					
+void ADC_conversion(int convMode);
 void ADC_trigger(TIM_TypeDef* TIMx, int msec, int edge);
 
 // JADC setting
