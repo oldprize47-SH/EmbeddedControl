@@ -1,8 +1,8 @@
 # 통합 근거와 원본 보존 / Consolidation and provenance
 
-## 로컬 통합 방식
+## 통합 방식
 
-공개 embedded 포크에서 새 로컬 브랜치 `consolidation/embedded-local-20260929`를 만들고, 비공개 recycling의 `main`을 로컬 파일 경로로 fetch했습니다. 두 부모를 갖는 subtree import 커밋을 만든 다음 중복을 정리했습니다. squash, history rewrite, 원격 push, 공개 전송이나 가시성 변경은 수행하지 않았습니다.
+공개 embedded 포크에서 새 로컬 브랜치 `consolidation/embedded-local-20260929`를 만들고, 비공개 recycling의 `main`을 로컬 파일 경로로 fetch했습니다. 두 부모를 갖는 subtree import 커밋을 만든 다음 중복을 정리했습니다. squash나 기존 이력 재작성 없이 통합했습니다. 소유자의 2026년 9월 29일 요청에 따라 공개 STM32 저장소를 통합 목적지로 사용합니다.
 
 - embedded 원본: `d02d6d01d80dce9fb510901e1de003cc78785adf`
 - recycling 원본: `702d06380c1fbecfebd83264d048751a8a63e260`
@@ -44,7 +44,7 @@ git diff --stat preservation/embedded-before-consolidation HEAD
 git merge-base --is-ancestor preservation/recycling-source-20260929 HEAD
 ```
 
-권장 최종 목적지는 기존 비공개 recycling 저장소입니다. 소유자가 선택한 후, 리드는 이 통합 브랜치를 로컬 경로로 recycling에 fetch해 검토할 수 있습니다. 원본 recycling HEAD가 통합 HEAD의 조상이므로 이력 손실 없이 fast-forward 가능한 구조입니다. 기존 공개 embedded 포크는 그대로 보존합니다. 공개 포크의 가시성 전환 가능성에 의존하지 않습니다.
+최종 목적지는 공개 `oldprize47-SH/stm32-embedded-controller`입니다. 통합본의 원격 반영과 원본 백업을 확인한 뒤 별도 분리수거함 저장소를 정리합니다.
 
 ## English
 
@@ -54,4 +54,4 @@ Board 1 retains its distinct 9 implementation files and 12 headers. Its API name
 
 Two identical recycling diagrams now have one root copy. The bilingual root tells the course story; component guides explain implementation details. Original attribution, photographs, circuit documentation and source history remain available. Exact per-file mappings, hashes and validation commands are in the adjacent local receipts.
 
-**Destination recommendation:** use the existing private recycling repository for the complete course integration and preserve the public embedded fork. This merged history is private regardless of the original checkout's public remote. No remote operation is authorized by this preparation, and current-file sanitization does not sanitize historical commits. See [NOTICE](../NOTICE.md).
+**Destination:** `oldprize47-SH/stm32-embedded-controller`, published at the owner’s request on 29 September 2026. Both histories are preserved, and local bundles retain the original repositories. The separate recycling repository can be retired after the integrated remote is verified. See [NOTICE](../NOTICE.md).

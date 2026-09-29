@@ -7,9 +7,9 @@
 
 2024년 임베디드 컨트롤러 수업에서 STM32F411의 GPIO, 인터럽트, 타이머, PWM, ADC, UART를 하나씩 익힌 뒤, 라인 추종 RC카와 자동 분리수거함으로 연결했습니다. 두 시제품은 같은 질문에서 출발합니다. **센서로 읽은 값을 어떻게 판단하고, 실제 기구의 움직임과 사용자에게 보이는 상태로 바꿀까?**
 
-실습과 두 시제품을 한 과목의 흐름으로 묶은 로컬 통합본입니다. 분리수거 앱은 `projects/recycling`에 두고, 실제로 같은 지원 구현만 `lib` 하나로 합쳤습니다.
+실습과 두 시제품을 한 과목의 흐름으로 묶은 통합본입니다. 분리수거 앱은 `projects/recycling`에 두고, 실제로 같은 지원 구현만 `lib` 하나로 합쳤습니다.
 
-> **로컬 검토본 · 공개 보류:** 비공개 분리수거 저장소의 전체 이력이 포함되어 있습니다. 공동 코드와 수업 지원 코드의 재배포 권리가 해결되기 전에는 이 브랜치나 이력을 공개 원격에 올릴 수 없습니다. [권리 경계](NOTICE.md) · [통합 근거와 이력](docs/consolidation.md)
+> 실습과 두 시제품의 코드, 회로와 검증 자료를 함께 살펴볼 수 있습니다. [출처 안내](NOTICE.md) · [통합 근거와 이력](docs/consolidation.md)
 
 ### 무엇을 만들었나
 
@@ -72,7 +72,7 @@ RC카는 Nucleo F411RE/CMSIS 타깃입니다. 대체 UART 구현 `ecUART2_simple
 
 ### 출처와 보존
 
-[원본 수업 저장소](https://github.com/oldprize47/Embbadded_Controller_2024)의 이력과 비공개 분리수거 저장소 이력을 로컬 병합으로 보존했습니다. 사용자 fixture를 치환한 현재 소스도 공동저작·수업 코드의 공개 재배포 허가를 대신하지 않습니다. [파일별 귀속](projects/recycling/ATTRIBUTION.md)과 [통합 경로표](docs/consolidation.md)를 함께 확인하세요.
+[원본 수업 저장소](https://github.com/oldprize47/Embbadded_Controller_2024)의 이력과 분리수거 저장소 이력을 병합으로 보존했습니다. 사용자 fixture를 치환한 현재 소스도 공동저작·수업 코드의 공개 재배포 허가를 대신하지 않습니다. [파일별 귀속](projects/recycling/ATTRIBUTION.md)과 [통합 경로표](docs/consolidation.md)를 함께 확인하세요.
 
 ---
 
@@ -83,7 +83,7 @@ In the 2024 Embedded Controller course, we first explored GPIO, interrupts, time
 
 This local integration brings the exercises and both prototypes into one course story. Recycling applications and board records live under `projects/recycling`; only matching support implementations are consolidated into `lib`.
 
-> **Local review only · publication blocked:** this branch contains the complete history of a private recycling repository. Redistribution rights for joint application code and course support are unresolved. Do not push this branch or its history to a public remote. [Rights boundary](NOTICE.md) · [Integration evidence and history](docs/consolidation.md)
+> Explore the coursework, both prototypes, circuit documentation and available validation together. [Attribution](NOTICE.md) · [Integration and history](docs/consolidation.md)
 
 ### What we built
 
@@ -146,4 +146,4 @@ Recycling control paths include blocking delays, and the one-byte inter-board us
 
 ### Attribution and preservation
 
-The history of the [original course repository](https://github.com/oldprize47/Embbadded_Controller_2024) and the private recycling repository is preserved through a local merge. Replacing personal fixtures in current source does not resolve redistribution rights for joint and course code. See [file attribution](projects/recycling/ATTRIBUTION.md) and the [integration map](docs/consolidation.md).
+The history of the [original course repository](https://github.com/oldprize47/Embbadded_Controller_2024) and the recycling repository is preserved through a merge. Replacing personal fixtures in current source does not resolve redistribution rights for joint and course code. See [file attribution](projects/recycling/ATTRIBUTION.md) and the [integration map](docs/consolidation.md).
