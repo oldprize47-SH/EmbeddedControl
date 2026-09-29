@@ -5,6 +5,8 @@
 <a id="korean"></a>
 ## 한국어
 
+[코드 읽는 순서](#코드-따라-읽기)
+
 2024년 임베디드 컨트롤러 수업에서 STM32F411의 GPIO, 인터럽트, 타이머, PWM, ADC, UART를 하나씩 익힌 뒤, 라인 추종 RC카와 자동 분리수거함으로 연결했습니다. 두 시제품은 같은 질문에서 출발합니다. **센서로 읽은 값을 어떻게 판단하고, 실제 기구의 움직임과 사용자에게 보이는 상태로 바꿀까?**
 
 실습과 두 시제품을 한 과목의 흐름으로 묶은 통합본입니다. 분리수거 앱은 `projects/recycling`에 두고, 실제로 같은 지원 구현만 `lib` 하나로 합쳤습니다.
@@ -19,9 +21,9 @@
 | RC카 | 블루투스 명령, 좌우 적외선 반사값, 초음파 장애물 조건 | 수동 이동·속도·조향, 자동 라인 추종, 정지 동작 통합 |
 | 자동 분리수거함 | 등록된 사용자·제품 바코드, IR 투입 감지, 수거함 거리 | 분류 경로·투입구 제어, 포인트·상태 메시지, 만재 알림 |
 
-![수업 프로젝트 개념도](docs/goals/project-focus-v1.png)
+![수업 프로젝트 개념도](docs/goals/goal.png)
 
-AI로 생성한 개념도이며 실제 장치 사진이나 측정 결과가 아닙니다.
+<sub>AI 생성 개념도</sub>
 
 ### RC카: 입력을 주행 상태로 연결하기
 
@@ -74,10 +76,24 @@ RC카는 Nucleo F411RE/CMSIS 타깃입니다. 대체 UART 구현 `ecUART2_simple
 
 [원본 수업 저장소](https://github.com/oldprize47/Embbadded_Controller_2024)의 이력과 분리수거 저장소 이력을 병합으로 보존했습니다. 사용자 fixture를 치환한 현재 소스도 공동저작·수업 코드의 공개 재배포 허가를 대신하지 않습니다. [파일별 귀속](projects/recycling/ATTRIBUTION.md)과 [통합 경로표](docs/consolidation.md)를 함께 확인하세요.
 
+### 코드 따라 읽기
+
+아래 순서는 파일의 역할과 연결을 이해하기 위한 안내입니다. 독립 과제나 보드별 프로그램은 한꺼번에 실행하지 않고 해당 항목의 실행 안내를 따릅니다.
+
+| 순서 | 파일 | 역할과 다음 단계 |
+|---|---|---|
+| 1 | [platformio.ini](platformio.ini) | 먼저 RC 빌드 대상이 LAB_RC_Final.c와 공용 lib로 제한되는지 확인합니다. 모든 실습 main을 한꺼번에 빌드하는 구성이 아닙니다. |
+| 2 | [LAB/LAB_RC_Final.c](LAB/LAB_RC_Final.c) | 입력 처리에서 수동 조작·라인 추종과 모터 출력으로 이어지는 분기를 읽습니다. |
+| 3 | [projects/recycling/firmware/board-1/app/main.c](projects/recycling/firmware/board-1/app/main.c) | 분리수거함의 첫 보드 앱을 읽고 UART로 주고받는 정보가 다음 보드에서 어떻게 사용되는지 비교합니다. |
+| 4 | [projects/recycling/firmware/board-2/app/main.c](projects/recycling/firmware/board-2/app/main.c) | 다른 보드의 수신 처리, 센서와 구동부 흐름을 첫 보드와 대조합니다. 보드별 main과 지원 라이브러리를 섞지 않습니다. |
+| 5 | [projects/recycling/BUILDING.md](projects/recycling/BUILDING.md) | 보드별 소스 목록과 외부 startup·링커·vendor 의존성을 확인한 뒤 빌드 구성을 준비합니다. |
+
 ---
 
 <a id="english"></a>
 ## English
+
+[Code walkthrough](#code-walkthrough)
 
 In the 2024 Embedded Controller course, we first explored GPIO, interrupts, timers, PWM, ADC and UART on the STM32F411, then combined them in a line-following RC car and an automatic recycling prototype. Both ask the same practical question: **how do sensor readings become decisions, physical movement and useful feedback for a person?**
 
@@ -93,9 +109,9 @@ This local integration brings the exercises and both prototypes into one course 
 | RC car | Bluetooth commands, left/right infrared readings and ultrasonic obstacle conditions | Manual movement, speed and steering; automatic line following and stopping |
 | Recycling prototype | Registered user/item barcodes, infrared deposit detection and bin distance | Sorting and entrance control, points/status messages and full-bin notification |
 
-![Course project concept](docs/goals/project-focus-v1.png)
+![Course project concept](docs/goals/goal.png)
 
-AI-generated concept illustration, not a photograph of the device or a measured result.
+<sub>AI-generated concept illustration</sub>
 
 ### RC car: turning inputs into driving states
 
@@ -147,3 +163,14 @@ Recycling control paths include blocking delays, and the one-byte inter-board us
 ### Attribution and preservation
 
 The history of the [original course repository](https://github.com/oldprize47/Embbadded_Controller_2024) and the recycling repository is preserved through a merge. Replacing personal fixtures in current source does not resolve redistribution rights for joint and course code. See [file attribution](projects/recycling/ATTRIBUTION.md) and the [integration map](docs/consolidation.md).
+### Code walkthrough
+
+Use this order to understand each file and its connections. Independent exercises and board targets are not one executable; follow the relevant run instructions below.
+
+| Step | File | Role and next step |
+|---|---|---|
+| 1 | [platformio.ini](platformio.ini) | Start with the RC build filter: LAB_RC_Final.c and the shared library, rather than every exercise main. |
+| 2 | [LAB/LAB_RC_Final.c](LAB/LAB_RC_Final.c) | Follow input handling through manual control, line following and motor outputs. |
+| 3 | [projects/recycling/firmware/board-1/app/main.c](projects/recycling/firmware/board-1/app/main.c) | Read the first recycling-board application and trace its UART information into the other board. |
+| 4 | [projects/recycling/firmware/board-2/app/main.c](projects/recycling/firmware/board-2/app/main.c) | Compare reception, sensors and actuation with board 1; keep each board main paired with its support variant. |
+| 5 | [projects/recycling/BUILDING.md](projects/recycling/BUILDING.md) | Use the per-board source list and external startup, linker and vendor requirements to prepare the build. |
